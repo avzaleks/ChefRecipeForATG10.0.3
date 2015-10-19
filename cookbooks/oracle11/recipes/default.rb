@@ -83,17 +83,19 @@ template rsp_file do
   source 'xe.rsp.erb'
 end
 
-execute 'CONNECT_TIMEOUT_LISTENER' do
-  user 'root'
-  command "echo 'CONNECT_TIMEOUT_LISTENER=240' >>/u01/app/oracle/product/11.2.0/xe/network/admin/samples/listener.ora"
+template '/u01/app/oracle/product/11.2.0/xe/network/admin/samples/listener.ora' do
+  source 'listener.ora.erb'
+  owner "#{user}"
+  group "#{group}"
+  mode '0755'
 end
 
-execute 'sqlnet.inbound_connect_timeout' do
-  user 'root'
-  command "echo 'sqlnet.inbound_connect_timeout = 240' >>/u01/app/oracle/product/11.2.0/xe/network/admin/samples/sqlnet.ora"
+template '/u01/app/oracle/product/11.2.0/xe/network/admin/samples/sqlnet.ora' do
+  source 'sqlnet.ora.erb'
+  owner "#{user}"
+  group "#{group}"
+  mode '0755'
 end
-
-
 
 execute 'ora_config' do
   user 'root'
@@ -117,7 +119,7 @@ cookbook_file '/etc/yum.repos.d/spacewalk.repo' do
 end
   
 node['ora']['sel_pol'].each do |pack|
- package pack
+  package pack
 end
 
 if node['ora']['use_dump_files']

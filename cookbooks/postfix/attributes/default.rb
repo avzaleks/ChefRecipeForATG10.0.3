@@ -19,7 +19,7 @@ default['postfix']['server_port'] = '587'
 default['postfix']['user_account_name'] = 'aleksandr.zaichko'
 default['postfix']['identity_file_name'] = 'sasl_passwd'
 default['postfix']['host_name'] = node['hostname']
-default['postfix']['user_account_passwd'] = ''
+default['postfix']['user_account_passwd'] = 'Password1111'
 default['postfix']['host_domain'] = 'example.com'
 default['postfix']['test_mail_address'] = 'aleksforjob@gmail.com'
 

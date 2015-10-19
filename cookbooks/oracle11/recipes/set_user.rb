@@ -25,10 +25,6 @@ group_gid = node['ora']['group_gid'].to_i
 
 pswd = node['ora']['user_password']
 
-if "cat /etc/group | grep #{group_gid}" 
-   group_gid = group_gid + 1
-end
-
 group group do 
   gid "#{group_gid}"  
 end
