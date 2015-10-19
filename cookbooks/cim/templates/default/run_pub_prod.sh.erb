@@ -1,0 +1,11 @@
+#/bin/bash
+
+/etc/init.d/jboss stop
+
+echo ""
+echo "---------------RUN PUBLISHUNG SERVER--------------------------------"
+su - <%= node['cim']['user']%> -c "<%= node['cim']['jboss_home']%>/bin/run.sh -c <%= node['cim']['pub_serv_inst_name']%> -b 0.0.0.0 >/dev/null &"
+sleep 180
+echo ""
+echo "---------------RUN PUBLISHUNG SERVER--------------------------------"
+su - <%= node['cim']['user']%> -c "<%= node['cim']['jboss_home']%>/bin/run.sh -c <%= node['cim']['prod_serv_inst_name']%> -b 0.0.0.0 >/dev/null &"

@@ -1,0 +1,14 @@
+Centos6.6.GA.ova
+arch_for_atg10.0.3_java6_jBoss5.1
+arch_for_oracle
+chef-12.1.2-1.el6.x86_64.rpm
+createvm.sh
+import_keys.sh
+ip.txt
+ipsmb.txt
+ls
+nmap.txt
+oracle_template.json
+run_recipe.sh
+sudoers
+template.json

@@ -1,0 +1,374 @@
+# CIM Headless Mode inputs.  Edit values as needed and execute with cim -batch /path/to/this.file
+
+atg.cim.productconfig.productselector.ProductSelectionContextTask.selectedProductIdList=store
+atg.cim.productconfig.productselector.ProductSelectionContextTask.selectedAddOnIdList=merch,switchingdatasource,storefront_demo,fulfillment,storefront-full-setup,fulfillment_using_atg
+atg.cim.productconfig.productselector.ProductSelectionContextTask.execute()
+atg.cim.productconfig.appserver.AppServerSelectTask.type=JBoss
+atg.cim.productconfig.appserver.AppServerSelectTask.execute()
+atg.cim.productconfig.appserver.AppServerPathTask.path=<%= node['cim']['jboss_home']%>/
+atg.cim.productconfig.appserver.AppServerPathTask.execute()
+atg.cim.productconfig.appserver.AppServerSelectionPersistenceTask.execute()
+atg.cim.database.CreateSchemaTask.cimDatasourceId=management
+atg.cim.database.CreateSchemaTask.datasourceProperties=url=jdbc:oracle:thin:@<%= node['cim']['ip_of_dbhost']%>:<%= node['cim']['port_of_dbhost']%>:<%= node['cim']['db_sid']%>,port=<%= node['cim']['port_of_dbhost']%>,databaseType=oraclethin,driverPathsAsString=<%= node['cim']['path_to_jdbc_driver']%>,,,username=<%= node['cim']['pub_user']%>,alias=management,jndiName=ATGPublishingDS,databaseName=<%= node['cim']['db_sid']%>,hostname=<%= node['cim']['ip_of_dbhost']%>,password=<%= node['cim']['pub_user_pswd']%>
+atg.cim.database.CreateSchemaTask.execute()
+atg.cim.database.ImportDataTask.cimDatasourceId=management
+atg.cim.database.ImportDataTask.execute()
+atg.cim.database.CreateSchemaTask.cimDatasourceId=switchingA
+atg.cim.database.CreateSchemaTask.datasourceProperties=url=jdbc:oracle:thin:@<%= node['cim']['ip_of_dbhost']%>:<%= node['cim']['port_of_dbhost']%>:<%= node['cim']['db_sid']%>,port=<%= node['cim']['port_of_dbhost']%>,databaseType=oraclethin,driverPathsAsString=<%= node['cim']['path_to_jdbc_driver']%>,,,username=<%= node['cim']['a_user']%>,alias=switchingA,jndiName=ATGSwitchingDS_A,databaseName=<%= node['cim']['db_sid']%>,hostname=<%= node['cim']['ip_of_dbhost']%>,password=<%= node['cim']['a_user_pswd']%>
+atg.cim.database.CreateSchemaTask.execute()
+atg.cim.database.ImportDataTask.cimDatasourceId=switchingA
+atg.cim.database.ImportDataTask.execute()
+atg.cim.database.CreateSchemaTask.cimDatasourceId=switchingB
+atg.cim.database.CreateSchemaTask.datasourceProperties=url=jdbc:oracle:thin:@<%= node['cim']['ip_of_dbhost']%>:<%= node['cim']['port_of_dbhost']%>:<%= node['cim']['db_sid']%>,port=<%= node['cim']['port_of_dbhost']%>,databaseType=oraclethin,driverPathsAsString=<%= node['cim']['path_to_jdbc_driver']%>,,,username=<%= node['cim']['b_user']%>,alias=switchingB,jndiName=ATGSwitchingDS_B,databaseName=<%= node['cim']['db_sid']%>,hostname=<%= node['cim']['ip_of_dbhost']%>,password=<%= node['cim']['b_user_pswd']%>
+atg.cim.database.CreateSchemaTask.execute()
+atg.cim.database.ImportDataTask.cimDatasourceId=switchingB
+atg.cim.database.ImportDataTask.execute()
+atg.cim.database.CreateSchemaTask.cimDatasourceId=switchingCore
+atg.cim.database.CreateSchemaTask.datasourceProperties=url=jdbc:oracle:thin:@<%= node['cim']['ip_of_dbhost']%>:<%= node['cim']['port_of_dbhost']%>:<%= node['cim']['db_sid']%>,port=<%= node['cim']['port_of_dbhost']%>,databaseType=oraclethin,driverPathsAsString=<%= node['cim']['path_to_jdbc_driver']%>,,,username=<%= node['cim']['core_user']%>,alias=switchingCore,jndiName=ATGProductionDS,databaseName=<%= node['cim']['db_sid']%>,hostname=<%= node['cim']['ip_of_dbhost']%>,password=<%= node['cim']['core_user_pswd']%>
+atg.cim.database.CreateSchemaTask.execute()
+atg.cim.database.ImportDataTask.cimDatasourceId=switchingCore
+atg.cim.database.ImportDataTask.execute()
+atg.cim.worker.common.PropertyFileClearPersistanceTask.serverInstanceTypeId=management
+atg.cim.worker.common.PropertyFileClearPersistanceTask.execute()
+atg.cim.productconfig.serverinstance.ServerInstanceNameTask.serverInstanceName=<%= node['cim']['pub_serv_inst_name']%>
+atg.cim.productconfig.serverinstance.ServerInstanceNameTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.httpPort=8180
+atg.cim.worker.common.MapPropertyFileCreatorTask.httpsPort=8543
+atg.cim.worker.common.MapPropertyFileCreatorTask.siteHttpServerPort=8180
+atg.cim.worker.common.MapPropertyFileCreatorTask.rmiPort=8861
+atg.cim.worker.common.MapPropertyFileCreatorTask.drpPort=8851
+atg.cim.worker.common.MapPropertyFileCreatorTask.fileDeploymentPort=8811
+atg.cim.worker.common.MapPropertyFileCreatorTask.fileSychronizationDeploymentPort=8816
+atg.cim.worker.common.MapPropertyFileCreatorTask.adminPort^=/atg/dynamo/Configuration.httpPort
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/dynamo/Configuration.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.initialServices+=/atg/dynamo/service/ServerLockManager
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/dynamo/Initial.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.port=9010
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/dynamo/service/ServerLockManager.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.lockServerAddress=localhost
+atg.cim.worker.common.MapPropertyFileCreatorTask.lockServerPort=9010
+atg.cim.worker.common.MapPropertyFileCreatorTask.useLockServer=true
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/dynamo/service/ClientLockManager.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.dataSource=/atg/dynamo/service/jdbc/DirectJTDataSource
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/dynamo/service/jdbc/JTDataSource.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.clusterName=management
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/dynamo/service/ClusterName.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.JNDIName=java:/ATGSwitchingDS_A
+atg.cim.worker.common.MapPropertyFileCreatorTask.className=atg.nucleus.JNDIReference
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/dynamo/service/jdbc/SwitchingDataSourceA.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.JNDIName=java:/ATGSwitchingDS_B
+atg.cim.worker.common.MapPropertyFileCreatorTask.className=atg.nucleus.JNDIReference
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/dynamo/service/jdbc/SwitchingDataSourceB.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.dataSource=/atg/dynamo/service/jdbc/SwitchingDataSource
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/userprofiling/PersonalizationRepository_production.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.dataSource=/atg/dynamo/service/jdbc/SwitchingDataSource
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/store/stores/StoreRepository_production.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.dataSource=/atg/dynamo/service/jdbc/DirectJTDataSource_production
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/dynamo/service/jdbc/JTDataSource_production.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.dataSource=/atg/dynamo/service/jdbc/SwitchingDataSource
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/multisite/SiteRepository_production.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.modules=DCS-UI.Versioned, BIZUI, PubPortlet, DafEar.Admin, SiteAdmin.Versioned, B2CCommerce.Versioned, DCS.Versioned, DCS-UI, Store.EStore.Versioned, Store.Storefront
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/moduleList.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.dataSource=/atg/dynamo/service/jdbc/SwitchingDataSource
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/seo/SEORepository_production.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.JNDIName=java:/ATGProductionDS
+atg.cim.worker.common.MapPropertyFileCreatorTask.className=atg.nucleus.JNDIReference
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/dynamo/service/jdbc/DirectJTDataSource_production.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.JNDIName=java:/ATGPublishingDS
+atg.cim.worker.common.MapPropertyFileCreatorTask.className=atg.nucleus.JNDIReference
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/dynamo/service/jdbc/DirectJTDataSource.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.lockServerPort=9012
+atg.cim.worker.common.MapPropertyFileCreatorTask.useLockServer=true
+atg.cim.worker.common.MapPropertyFileCreatorTask.lockServerAddress=localhost
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/dynamo/service/ClientLockManager_production.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.dataSource=/atg/dynamo/service/jdbc/SwitchingDataSource
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/commerce/pricing/priceLists/PriceLists_production.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.dataSource=/atg/dynamo/service/jdbc/SwitchingDataSource
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['pub_serv_inst_name']%>/localconfig/atg/commerce/catalog/ProductCatalog_production.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.productconfig.serverinstance.MakeServerInstanceFromPatternTask.serverInstancePatternId=management_lock
+atg.cim.productconfig.serverinstance.MakeServerInstanceFromPatternTask.serverInstanceName=<%= node['cim']['pub_serv_inst_name']%>
+atg.cim.productconfig.serverinstance.MakeServerInstanceFromPatternTask.serverInstanceTypeId=management
+atg.cim.productconfig.serverinstance.MakeServerInstanceFromPatternTask.execute()
+atg.cim.worker.common.PropertyFileClearPersistanceTask.serverInstanceTypeId=production
+atg.cim.worker.common.PropertyFileClearPersistanceTask.execute()
+atg.cim.productconfig.serverinstance.ServerInstanceNameTask.serverInstanceName=<%= node['cim']['prod_serv_inst_name']%>
+atg.cim.productconfig.serverinstance.ServerInstanceNameTask.execute()
+atg.cim.productconfig.serverinstance.jboss.JBossPortBindingsSelectTask.serverInstanceName=<%= node['cim']['prod_serv_inst_name']%>
+atg.cim.productconfig.serverinstance.jboss.JBossPortBindingsSelectTask.portBindingsName=ports-default
+atg.cim.productconfig.serverinstance.jboss.JBossPortBindingsSelectTask.useDefault=true
+atg.cim.productconfig.serverinstance.jboss.JBossPortBindingsSelectTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.httpPort=8080
+atg.cim.worker.common.MapPropertyFileCreatorTask.httpsPort=8443
+atg.cim.worker.common.MapPropertyFileCreatorTask.siteHttpServerPort=8080
+atg.cim.worker.common.MapPropertyFileCreatorTask.rmiPort=8860
+atg.cim.worker.common.MapPropertyFileCreatorTask.drpPort=8850
+atg.cim.worker.common.MapPropertyFileCreatorTask.fileDeploymentPort=8810
+atg.cim.worker.common.MapPropertyFileCreatorTask.adminPort^=/atg/dynamo/Configuration.httpPort
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/dynamo/Configuration.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.initialServices+=/atg/dynamo/service/ServerLockManager
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/dynamo/Initial.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.port=9012
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/dynamo/service/ServerLockManager.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.lockServerAddress=localhost
+atg.cim.worker.common.MapPropertyFileCreatorTask.lockServerPort=9012
+atg.cim.worker.common.MapPropertyFileCreatorTask.useLockServer=true
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/dynamo/service/ClientLockManager.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.useLockServer=true
+atg.cim.worker.common.MapPropertyFileCreatorTask.lockServerAddress=localhost
+atg.cim.worker.common.MapPropertyFileCreatorTask.lockServerPort=9012
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/dynamo/service/ClientLockManager_production.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.dataSource=/atg/dynamo/service/jdbc/SwitchingDataSource
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/store/stores/StoreRepository.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.dataSource=/atg/dynamo/service/jdbc/DirectJTDataSource
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/dynamo/service/jdbc/JTDataSource.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.dataSource=/atg/dynamo/service/jdbc/SwitchingDataSource
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/commerce/pricing/priceLists/PriceLists.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.clusterName=production
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/dynamo/service/ClusterName.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.JNDIName=java:/ATGSwitchingDS_A
+atg.cim.worker.common.MapPropertyFileCreatorTask.className=atg.nucleus.JNDIReference
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/dynamo/service/jdbc/SwitchingDataSourceA.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.JNDIName=java:/ATGSwitchingDS_B
+atg.cim.worker.common.MapPropertyFileCreatorTask.className=atg.nucleus.JNDIReference
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/dynamo/service/jdbc/SwitchingDataSourceB.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.dataSource=/atg/dynamo/service/jdbc/SwitchingDataSource
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/commerce/catalog/ProductCatalog.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.journaling=true
+atg.cim.worker.common.MapPropertyFileCreatorTask.scheduler=/atg/dynamo/service/Scheduler
+atg.cim.worker.common.MapPropertyFileCreatorTask.name2=DataSourceB
+atg.cim.worker.common.MapPropertyFileCreatorTask.name1=DataSourceA
+atg.cim.worker.common.MapPropertyFileCreatorTask.liveDirectory={serverHomeDirResource?resourceURI=PublishingAgent/deploymentconfig/live/config}
+atg.cim.worker.common.MapPropertyFileCreatorTask.dataDirectory={serverHomeDirResource?resourceURI=PublishingAgent/deploymentconfig/data/config}
+atg.cim.worker.common.MapPropertyFileCreatorTask.stagingDirectory={serverHomeDirResource?resourceURI=PublishingAgent/deploymentconfig/staging/config}
+atg.cim.worker.common.MapPropertyFileCreatorTask.className=atg.vfs.switchable.SwitchableLocalFileSystem
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/epub/file/ConfigFileSystem.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.dataSource=/atg/dynamo/service/jdbc/SwitchingDataSource
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/seo/SEORepository.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.dataSource=/atg/dynamo/service/jdbc/SwitchingDataSource
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/userprofiling/PersonalizationRepository.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.modules=DafEar.Admin, DPS, DSS, B2CCommerce, DCS.PublishingAgent, DCS.AbandonedOrderServices, Store.Storefront, Store.Fulfillment
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/moduleList.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.switchableDataStores+=/atg/dynamo/service/jdbc/SwitchingDataSource,/atg/epub/file/ConfigFileSystem
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/epub/DeploymentAgent.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.componentPath=/atg/dynamo/service/jdbc/DirectJTDataSource
+atg.cim.worker.common.MapPropertyFileCreatorTask.className=atg.nucleus.GenericReference
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/dynamo/service/jdbc/DirectJTDataSource_production.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.JNDIName=java:/ATGProductionDS
+atg.cim.worker.common.MapPropertyFileCreatorTask.className=atg.nucleus.JNDIReference
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/dynamo/service/jdbc/DirectJTDataSource.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.worker.common.MapPropertyFileCreatorTask.dataSource=/atg/dynamo/service/jdbc/SwitchingDataSource
+atg.cim.worker.common.MapPropertyFileCreatorTask.propertiesFile=/opt/ATG/ATG/10.0.3/home/../home/servers/<%= node['cim']['prod_serv_inst_name']%>/localconfig/atg/multisite/SiteRepository.properties
+atg.cim.worker.common.MapPropertyFileCreatorTask.execute()
+atg.cim.productconfig.serverinstance.MakeServerInstanceFromPatternTask.serverInstancePatternId=production_lock
+atg.cim.productconfig.serverinstance.MakeServerInstanceFromPatternTask.serverInstanceName=<%= node['cim']['prod_serv_inst_name']%>
+atg.cim.productconfig.serverinstance.MakeServerInstanceFromPatternTask.serverInstanceTypeId=production
+atg.cim.productconfig.serverinstance.MakeServerInstanceFromPatternTask.execute()
+atg.cim.productconfig.appassembly.EarFileNameTask.earFileName=<%= node['cim']['prod_serv_inst_name']%>.ear
+atg.cim.productconfig.appassembly.EarFileNameTask.serverInstanceId=production_lock
+atg.cim.productconfig.appassembly.EarFileNameTask.execute()
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.jbossServer=cim_create_server
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.serverInstanceName=<%= node['cim']['prod_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.execute()
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.jbossTemplate=default
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.serverInstanceName=<%= node['cim']['prod_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.execute()
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.serverInstanceName=<%= node['cim']['prod_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.jbossServer=<%= node['cim']['prod_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.execute()
+atg.cim.productconfig.deploy.jboss.CreateJbossAppServerInstanceTask.antFile=/opt/ATG/ATG/10.0.3/home/../CIM/plugins/Base/ant/cim-ant.xml
+atg.cim.productconfig.deploy.jboss.CreateJbossAppServerInstanceTask.serverInstanceName=<%= node['cim']['prod_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.CreateJbossAppServerInstanceTask.jbossPath=<%= node['cim']['jboss_home']%>/
+atg.cim.productconfig.deploy.jboss.CreateJbossAppServerInstanceTask.execute()
+atg.cim.productconfig.serverinstance.jboss.CreateJBossServerStartScriptTask.serverInstanceName=<%= node['cim']['prod_serv_inst_name']%>
+atg.cim.productconfig.serverinstance.jboss.CreateJBossServerStartScriptTask.execute()
+atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask.moduleNames=DafEar.Admin,DPS,DSS,B2CCommerce,DCS.PublishingAgent,DCS.AbandonedOrderServices,Store.Storefront,Store.Fulfillment
+atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask.antFile=/opt/ATG/ATG/10.0.3/home/../CIM/plugins/Base/ant/cim-ant.xml
+atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask.earFileName=<%= node['cim']['prod_serv_inst_name']%>.ear
+atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask.serverInstanceName=<%= node['cim']['prod_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask.path=<%= node['cim']['jboss_home']%>/server/
+atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask.args=
+atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask.layerArg=
+atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask.execute()
+atg.cim.worker.common.CopyFileTask.srcFilePath=/opt/ATG/ATG/10.0.3/home/../CIM/plugins/Base/filetemplate/jboss-open-ds.xml
+atg.cim.worker.common.CopyFileTask.targetFilePath=<%= node['cim']['jboss_home']%>/server/<%= node['cim']['prod_serv_inst_name']%>/deploy/atg-ds.xml
+atg.cim.worker.common.CopyFileTask.execute()
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.jbossPath=<%= node['cim']['jboss_home']%>/
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.serverInstanceName=<%= node['cim']['prod_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.databaseType=oraclethin
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.fileName=atg-ds.xml
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.jndiName=ATGProductionDS
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.url=jdbc:oracle:thin:@<%= node['cim']['ip_of_dbhost']%>:<%= node['cim']['port_of_dbhost']%>:<%= node['cim']['db_sid']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.hostname=<%= node['cim']['ip_of_dbhost']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.port=<%= node['cim']['port_of_dbhost']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.databaseName=<%= node['cim']['db_sid']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.driverClassName=oracle.jdbc.xa.client.OracleXADataSource
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.username=<%= node['cim']['core_user']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.password=<%= node['cim']['core_user_pswd']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.execute()
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.jbossPath=<%= node['cim']['jboss_home']%>/
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.serverInstanceName=<%= node['cim']['prod_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.databaseType=oraclethin
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.fileName=atg-ds.xml
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.jndiName=ATGSwitchingDS_B
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.url=jdbc:oracle:thin:@<%= node['cim']['ip_of_dbhost']%>:<%= node['cim']['port_of_dbhost']%>:<%= node['cim']['db_sid']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.hostname=<%= node['cim']['ip_of_dbhost']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.port=<%= node['cim']['port_of_dbhost']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.databaseName=<%= node['cim']['db_sid']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.driverClassName=oracle.jdbc.xa.client.OracleXADataSource
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.username=<%= node['cim']['b_user']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.password=<%= node['cim']['b_user_pswd']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.execute()
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.jbossPath=<%= node['cim']['jboss_home']%>/
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.serverInstanceName=<%= node['cim']['prod_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.databaseType=oraclethin
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.fileName=atg-ds.xml
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.jndiName=ATGSwitchingDS_A
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.url=jdbc:oracle:thin:@<%= node['cim']['ip_of_dbhost']%>:<%= node['cim']['port_of_dbhost']%>:<%= node['cim']['db_sid']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.hostname=<%= node['cim']['ip_of_dbhost']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.port=<%= node['cim']['port_of_dbhost']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.databaseName=<%= node['cim']['db_sid']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.driverClassName=oracle.jdbc.xa.client.OracleXADataSource
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.username=<%= node['cim']['a_user']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.password=<%= node['cim']['a_user_pswd']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.execute()
+atg.cim.worker.common.ReplaceDynamicValuesTask.append=true
+atg.cim.worker.common.ReplaceDynamicValuesTask.inputPath=/opt/ATG/ATG/10.0.3/home/../CIM/plugins/Base/filetemplate/jboss-close-ds.xml
+atg.cim.worker.common.ReplaceDynamicValuesTask.outputPath=<%= node['cim']['jboss_home']%>/server/<%= node['cim']['prod_serv_inst_name']%>/deploy/atg-ds.xml
+atg.cim.worker.common.ReplaceDynamicValuesTask.execute()
+atg.cim.productconfig.deploy.jboss.JbossCopyJdbcDriverJarTask.jbossPath=<%= node['cim']['jboss_home']%>
+atg.cim.productconfig.deploy.jboss.JbossCopyJdbcDriverJarTask.serverInstanceName=<%= node['cim']['prod_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossCopyJdbcDriverJarTask.driverPaths=<%= node['cim']['path_to_jdbc_driver']%>
+atg.cim.productconfig.deploy.jboss.JbossCopyJdbcDriverJarTask.execute()
+atg.cim.productconfig.deploy.jboss.OptimizeJbossJVMTask.jbossPath=<%= node['cim']['jboss_home']%>/
+atg.cim.productconfig.deploy.jboss.OptimizeJbossJVMTask.comment=CIM - Modifying JBoss JVM Memory Settings
+atg.cim.productconfig.deploy.jboss.OptimizeJbossJVMTask.execute()
+atg.cim.productconfig.appassembly.EarFileNameTask.earFileName=<%= node['cim']['pub_serv_inst_name']%>.ear
+atg.cim.productconfig.appassembly.EarFileNameTask.serverInstanceId=management_lock
+atg.cim.productconfig.appassembly.EarFileNameTask.execute()
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.jbossServer=cim_create_server
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.serverInstanceName=<%= node['cim']['pub_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.execute()
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.jbossTemplate=default
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.serverInstanceName=<%= node['cim']['pub_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.execute()
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.serverInstanceName=<%= node['cim']['pub_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.jbossServer=<%= node['cim']['pub_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossServerSelectionTask.execute()
+atg.cim.productconfig.deploy.jboss.CreateJbossAppServerInstanceTask.antFile=/opt/ATG/ATG/10.0.3/home/../CIM/plugins/Base/ant/cim-ant.xml
+atg.cim.productconfig.deploy.jboss.CreateJbossAppServerInstanceTask.serverInstanceName=<%= node['cim']['pub_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.CreateJbossAppServerInstanceTask.jbossPath=<%= node['cim']['jboss_home']%>/
+atg.cim.productconfig.deploy.jboss.CreateJbossAppServerInstanceTask.execute()
+atg.cim.productconfig.serverinstance.jboss.CreateJBossServerStartScriptTask.serverInstanceName=<%= node['cim']['pub_serv_inst_name']%>
+atg.cim.productconfig.serverinstance.jboss.CreateJBossServerStartScriptTask.execute()
+atg.cim.productconfig.deploy.jboss.JBossPortBindingsConfigurationTask.portBindingsName=ports-01
+atg.cim.productconfig.deploy.jboss.JBossPortBindingsConfigurationTask.serverInstanceName=<%= node['cim']['pub_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JBossPortBindingsConfigurationTask.execute()
+atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask.moduleNames=DCS-UI.Versioned,BIZUI,PubPortlet,DafEar.Admin,SiteAdmin.Versioned,B2CCommerce.Versioned,DCS.Versioned,DCS-UI,Store.EStore.Versioned,Store.Storefront
+atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask.antFile=/opt/ATG/ATG/10.0.3/home/../CIM/plugins/Base/ant/cim-ant.xml
+atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask.earFileName=<%= node['cim']['pub_serv_inst_name']%>.ear
+atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask.serverInstanceName=<%= node['cim']['pub_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask.path=<%= node['cim']['jboss_home']%>/server/
+atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask.args=
+atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask.layerArg=
+atg.cim.productconfig.deploy.jboss.DeployEarToJbossTask.execute()
+atg.cim.worker.common.CopyFileTask.srcFilePath=/opt/ATG/ATG/10.0.3/home/../CIM/plugins/Base/filetemplate/jboss-open-ds.xml
+atg.cim.worker.common.CopyFileTask.targetFilePath=<%= node['cim']['jboss_home']%>/server/<%= node['cim']['pub_serv_inst_name']%>/deploy/atg-ds.xml
+atg.cim.worker.common.CopyFileTask.execute()
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.jbossPath=<%= node['cim']['jboss_home']%>/
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.serverInstanceName=<%= node['cim']['pub_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.databaseType=oraclethin
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.fileName=atg-ds.xml
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.jndiName=ATGProductionDS
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.url=jdbc:oracle:thin:@<%= node['cim']['ip_of_dbhost']%>:<%= node['cim']['port_of_dbhost']%>:<%= node['cim']['db_sid']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.hostname=<%= node['cim']['ip_of_dbhost']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.port=<%= node['cim']['port_of_dbhost']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.databaseName=<%= node['cim']['db_sid']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.driverClassName=oracle.jdbc.xa.client.OracleXADataSource
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.username=<%= node['cim']['core_user']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.password=<%= node['cim']['core_user_pswd']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.execute()
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.jbossPath=<%= node['cim']['jboss_home']%>/
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.serverInstanceName=<%= node['cim']['pub_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.databaseType=oraclethin
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.fileName=atg-ds.xml
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.jndiName=ATGSwitchingDS_B
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.url=jdbc:oracle:thin:@<%= node['cim']['ip_of_dbhost']%>:<%= node['cim']['port_of_dbhost']%>:<%= node['cim']['db_sid']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.hostname=<%= node['cim']['ip_of_dbhost']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.port=<%= node['cim']['port_of_dbhost']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.databaseName=<%= node['cim']['db_sid']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.driverClassName=oracle.jdbc.xa.client.OracleXADataSource
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.username=<%= node['cim']['b_user']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.password=<%= node['cim']['b_user_pswd']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.execute()
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.jbossPath=<%= node['cim']['jboss_home']%>/
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.serverInstanceName=<%= node['cim']['pub_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.databaseType=oraclethin
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.fileName=atg-ds.xml
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.jndiName=ATGSwitchingDS_A
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.url=jdbc:oracle:thin:@<%= node['cim']['ip_of_dbhost']%>:<%= node['cim']['port_of_dbhost']%>:<%= node['cim']['db_sid']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.hostname=<%= node['cim']['ip_of_dbhost']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.port=<%= node['cim']['port_of_dbhost']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.databaseName=<%= node['cim']['db_sid']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.driverClassName=oracle.jdbc.xa.client.OracleXADataSource
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.username=<%= node['cim']['a_user']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.password=<%= node['cim']['a_user_pswd']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.execute()
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.jbossPath=<%= node['cim']['jboss_home']%>/
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.serverInstanceName=<%= node['cim']['pub_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.databaseType=oraclethin
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.fileName=atg-ds.xml
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.jndiName=ATGPublishingDS
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.url=jdbc:oracle:thin:@<%= node['cim']['ip_of_dbhost']%>:<%= node['cim']['port_of_dbhost']%>:<%= node['cim']['db_sid']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.hostname=<%= node['cim']['ip_of_dbhost']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.port=<%= node['cim']['port_of_dbhost']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.databaseName=<%= node['cim']['db_sid']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.driverClassName=oracle.jdbc.xa.client.OracleXADataSource
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.username=<%= node['cim']['pub_user']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.password=<%= node['cim']['pub_user_pswd']%>
+atg.cim.productconfig.deploy.jboss.JbossRegisterDatasouceTask.execute()
+atg.cim.worker.common.ReplaceDynamicValuesTask.append=true
+atg.cim.worker.common.ReplaceDynamicValuesTask.inputPath=/opt/ATG/ATG/10.0.3/home/../CIM/plugins/Base/filetemplate/jboss-close-ds.xml
+atg.cim.worker.common.ReplaceDynamicValuesTask.outputPath=<%= node['cim']['jboss_home']%>/server/<%= node['cim']['pub_serv_inst_name']%>/deploy/atg-ds.xml
+atg.cim.worker.common.ReplaceDynamicValuesTask.execute()
+atg.cim.productconfig.deploy.jboss.JbossCopyJdbcDriverJarTask.jbossPath=<%= node['cim']['jboss_home']%>
+atg.cim.productconfig.deploy.jboss.JbossCopyJdbcDriverJarTask.serverInstanceName=<%= node['cim']['pub_serv_inst_name']%>
+atg.cim.productconfig.deploy.jboss.JbossCopyJdbcDriverJarTask.driverPaths=<%= node['cim']['path_to_jdbc_driver']%>
+atg.cim.productconfig.deploy.jboss.JbossCopyJdbcDriverJarTask.execute()

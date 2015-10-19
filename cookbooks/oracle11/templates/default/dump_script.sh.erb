@@ -1,0 +1,7 @@
+#!/bin/bash
+
+./impdp system/qazqaz@XE  schemas=PUB dumpfile=PUB.DMP logfile=PUB.DMP.log 
+./impdp system/qazqaz@XE  schemas=CATA dumpfile=CATA.DMP logfile=CATA.DMP.log 
+./impdp system/qazqaz@XE  schemas=CATB dumpfile=CATB.DMP logfile=CATB.DMP.log 
+./impdp system/qazqaz@XE  schemas=CORE dumpfile=CORE.DMP logfile=CORE.DMP.log 
+exit 0

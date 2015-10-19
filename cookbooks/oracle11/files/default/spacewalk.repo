@@ -1,0 +1,6 @@
+[spacewalk]
+name=Spacewalk
+baseurl=http://yum.spacewalkproject.org/1.9/RHEL/6/$basearch/
+gpgkey=http://yum.spacewalkproject.org/RPM-GPG-KEY-spacewalk-2012
+enabled=1
+gpgcheck=1

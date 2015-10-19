@@ -1,0 +1,22 @@
+create user <%= node['ora']['pub_user']%> identified by <%= node['ora']['pub_user_pswd']%>;
+grant "DBA" to <%= node['ora']['pub_user']%> with admin option;
+alter user <%= node['ora']['pub_user']%> default role "DBA";
+grant unlimited tablespace to <%= node['ora']['pub_user']%> with admin option;
+
+create user <%= node['ora']['a_user']%> identified by <%= node['ora']['a_user_pswd']%>;
+grant "DBA" to <%= node['ora']['a_user']%> with admin option;
+alter user <%= node['ora']['a_user']%> default role "DBA";
+grant unlimited tablespace to <%= node['ora']['a_user']%> with admin option;
+
+create user <%= node['ora']['b_user']%> identified by <%= node['ora']['b_user_pswd']%>;
+grant "DBA" to <%= node['ora']['b_user']%> with admin option;
+alter user <%= node['ora']['b_user']%> default role "DBA";
+grant unlimited tablespace to <%= node['ora']['b_user']%> with admin option;
+
+create user <%= node['ora']['core_user']%> identified by <%= node['ora']['core_user_pswd']%>;
+grant "DBA" to <%= node['ora']['core_user']%> with admin option;
+alter user <%= node['ora']['core_user']%> default role "DBA";
+grant unlimited tablespace to <%= node['ora']['core_user']%> with admin option;
+
+commit;
+

@@ -1,0 +1,58 @@
+_.rawWorkspaceDir=${ITEM_ROOTDIR}/workspace
+_.rawBuildsDir=${ITEM_ROOTDIR}/builds
+system_message=
+_.numExecutors=2
+_.labelString=
+master.mode=NORMAL
+_.quietPeriod=5
+_.scmCheckoutRetryCount=0
+namingStrategy=0
+stapler-class=jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy
+$class=jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy
+stapler-class=jenkins.model.ProjectNamingStrategy$PatternProjectNamingStrategy
+$class=jenkins.model.ProjectNamingStrategy$PatternProjectNamingStrategy
+_.namePattern=.*
+_.description=
+stapler-class=jenkins.mvn.DefaultSettingsProvider
+$class=jenkins.mvn.DefaultSettingsProvider
+stapler-class=jenkins.mvn.FilePathSettingsProvider
+$class=jenkins.mvn.FilePathSettingsProvider
+stapler-class=jenkins.mvn.DefaultGlobalSettingsProvider
+$class=jenkins.mvn.DefaultGlobalSettingsProvider
+stapler-class=jenkins.mvn.FilePathGlobalSettingsProvider
+$class=jenkins.mvn.FilePathGlobalSettingsProvider
+_.name=<%= node['jenkins']['another_jdk_name']%>
+_.home=<%= node['jenkins']['another_jdk_home']%>
+stapler-class-bag=true
+_.id=jdk-8u45-oth-JPR
+stapler-class=hudson.tools.JDKInstaller
+$class=hudson.tools.JDKInstaller
+globalMavenOpts=
+stapler-class=hudson.maven.local_repo.DefaultLocalRepositoryLocator
+$class=hudson.maven.local_repo.DefaultLocalRepositoryLocator
+stapler-class=hudson.maven.local_repo.PerExecutorLocalRepositoryLocator
+$class=hudson.maven.local_repo.PerExecutorLocalRepositoryLocator
+stapler-class=hudson.maven.local_repo.PerJobLocalRepositoryLocator
+$class=hudson.maven.local_repo.PerJobLocalRepositoryLocator
+_.usageStatisticsCollected=on
+_.url=http://<%= node['jenkins']['ip_jenkins_host']%>:10000/
+_.adminAddress=<%= node['jenkins']['admin_addr_email']%>
+port.type=random
+cvsCompression=3
+privateKeyLocation=/var/lib/jenkins/.ssh/id_rsa
+privateKeyPassword=
+knownHostsLocation=/var/lib/jenkins/.ssh/known_hosts
+svn.workspaceFormat=8
+svn.global_excluded_revprop:
+svn.storeAuthToDisk=on
+_.shell=
+_.smtpServer=localhost
+_.defaultSuffix=
+_.smtpAuthUserName=
+_.smtpAuthPasswordSecret=
+_.smtpPort=
+_.replyToAddress=
+_.charset=UTF-8
+sendTestMailTo=
+core:apply=true
+json={"rawWorkspaceDir": "${ITEM_ROOTDIR}/workspace", "rawBuildsDir": "${ITEM_ROOTDIR}/builds", "system_message": "", "jenkins-model-MasterBuildConfiguration": {"numExecutors": "2", "labelString": "", "mode": "NORMAL"}, "jenkins-model-GlobalQuietPeriodConfiguration": {"quietPeriod": "5"}, "jenkins-model-GlobalSCMRetryCountConfiguration": {"scmCheckoutRetryCount": "0"}, "jenkins-model-GlobalProjectNamingStrategyConfiguration": {}, "jenkins-model-GlobalNodePropertiesConfiguration": {"globalNodeProperties": {}}, "jenkins-mvn-GlobalMavenConfig": {"": ["0", "0"], "settingsProvider": {"stapler-class": "jenkins.mvn.DefaultSettingsProvider", "$class": "jenkins.mvn.DefaultSettingsProvider"}, "globalSettingsProvider": {"stapler-class": "jenkins.mvn.DefaultGlobalSettingsProvider", "$class": "jenkins.mvn.DefaultGlobalSettingsProvider"}}, "hudson-model-JDK": {"tool": {"name": "<%= node['jenkins']['another_jdk_name']%>", "home": "<%= node['jenkins']['another_jdk_home']%>", "properties": {"stapler-class-bag": "true"}}}, "hudson-maven-MavenModuleSet": {"globalMavenOpts": "", "": "0", "localRepository": {"stapler-class": "hudson.maven.local_repo.DefaultLocalRepositoryLocator", "$class": "hudson.maven.local_repo.DefaultLocalRepositoryLocator"}}, "hudson-model-UsageStatistics": {"usageStatisticsCollected": {}}, "jenkins-model-JenkinsLocationConfiguration": {"url": "http://<%= node['jenkins']['ip_jenkins_host']%>:10000/", "adminAddress": "<%= node['jenkins']['admin_addr_email']%>"}, "org-jenkinsci-main-modules-sshd-SSHD": {"port": {"value": "", "type": "random"}}, "hudson-scm-CVSSCM": {"cvsCompression": "3", "privateKeyLocation": "/var/lib/jenkins/.ssh/id_rsa", "privateKeyPassword": "", "knownHostsLocation": "/var/lib/jenkins/.ssh/known_hosts"}, "hudson-scm-SubversionSCM": {"workspaceFormat": "8", "global_excluded_revprop": "", "storeAuthToDisk": {}}, "hudson-tasks-Shell": {"shell": ""}, "hudson-tasks-Mailer": {"smtpServer": "localhost", "defaultSuffix": "", "useSsl": false, "smtpPort": "", "replyToAddress": "", "charset": "UTF-8"}, "core:apply": "true"}

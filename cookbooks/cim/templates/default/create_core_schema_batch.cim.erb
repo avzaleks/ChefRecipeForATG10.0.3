@@ -1,0 +1,3 @@
+atg.cim.database.CreateSchemaTask.cimDatasourceId=switchingCore
+atg.cim.database.CreateSchemaTask.datasourceProperties=url=jdbc:oracle:thin:@<%= node['cim']['ip_of_dbhost']%>:<%= node['cim']['port_of_dbhost']%>:<%= node['cim']['db_sid']%>,port=<%= node['cim']['port_of_dbhost']%>,databaseType=oraclethin,driverPathsAsString=<%= node['cim']['path_to_jdbc_driver']%>,,,username=<%= node['cim']['core_user']%>,alias=switchingCore,jndiName=ATGProductionDS,databaseName=<%= node['cim']['db_sid']%>,hostname=<%= node['cim']['ip_of_dbhost']%>,password=<%= node['cim']['core_user_pswd']%>
+atg.cim.database.CreateSchemaTask.execute()

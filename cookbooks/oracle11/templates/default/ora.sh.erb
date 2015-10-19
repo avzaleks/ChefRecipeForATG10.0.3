@@ -1,0 +1,5 @@
+export ORACLE_HOME=<%= node['ora']['ora_home']%>
+export ORACLE_SID=XE
+export NLS_LANG=`$ORACLE_HOME/bin/nls_lang.sh`
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib
+export PATH=$ORACLE_HOME/bin:$PATH

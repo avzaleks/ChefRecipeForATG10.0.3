@@ -1,0 +1,65 @@
+[global]
+
+#----------------------- Global Definitions ------------------------
+	
+	workgroup = <%= node['samba']['workgroupe']%>
+	server string = Samba Server %v
+	bind interfaces only = yes
+	interfaces = <%= node['samba']['name_of_interface']%>
+    hosts allow = ALL
+	
+#----------------------- Logging Options 
+		
+	log file = /var/log/samba/%m.log
+	max log size = 1024
+	
+#----------------------- Standalone Server Options 
+	security = user
+    encrypt passwords = yes
+	socket options = TCP_NODELAY SO_SNDBUF=8192 SO_RCVBUF=8192 IPTOS_LOWDELAY
+
+#----------------------- Browser Control Options 
+	
+	local master = yes
+	os level = 255
+	preferred master = yes
+
+#----------------------- Name Resolution 
+	
+	dns proxy = yes
+	
+#----------------------- Charsets
+
+	unix charset = utf8
+	dos charset = cp1251
+ 
+ 
+#----------------------- Shares Definitions ------------------------
+	
+[atg]
+
+		comment = Public Directories for ATG developers
+		path = <%= node['samba']['atg_directory']%>
+		browseable = yes
+		writable = yes
+		guest ok = yes
+		
+[jboss]
+
+		comment = Public Directories for Jenkins developers
+		path = <%= node['samba']['jboss_directory']%>
+		browseable = yes
+		writable = yes
+		guest ok = yes
+		
+		
+		
+		
+		
+		
+		
+		
+	
+	
+	
+	

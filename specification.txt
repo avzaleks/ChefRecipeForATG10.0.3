@@ -1,0 +1,126 @@
+The purpose of this recipe - is the creation of the database server Oracle, 
+ATG Webcommerce servers, Jenkins CI server, Samba server and mailing service.
+
+In folder chef-commerce-new you should run execute_recipe.bat file.
+
+1. First you will be asked to create virtual machines instances.
+   You should type Y/y or N/n. If you type y, then VMmanager will 
+   create two instances of virual machines with names - ATG and ORACLE.
+   Notice, that you may use one machine from them for this recipe.
+   
+2. Next step - is make choise if you want import public key to the virtual hosts.
+   It is desirable, if the machines is new. If yes - type i, else s.
+   Now you must know ip addresses of machines (ipconfig).
+   It is essential to have a folder .ssh in the home
+   directory of the user on the master host(mkdir .ssh)
+   In command prompt type appropriate ip. After this enter 
+   password which is - "reverse" once or twice.
+   
+3. The third step - the immediate launch of a prescription (you can guess where).
+   You must answer the questions provided, and begin execution of the recipe. 
+   It will take some time. After completing the recipe, you will be offered a choice -
+   to run or not instances of production and publishing servers. 
+   Type y or n (not by defailt).  
+
+4. After finish recipe execution you will have two network drives 
+   attached (for atg and jboss folders on virtual machine).
+   On jboss disk in folder jenkins_stuff is present jenkins artifacts
+   (ATGpublishing.ear, ATGproduction.ear). You cat read and copy them,
+   but not write.   
+  
+   
+5. port for ATGpublishing server - 8180
+   port for ATGproduction server - 8080
+   port for Jenkins - 10000
+   port for oraclexe - 1521
+   port for OracleWebAdmin -7070
+   password for Oracle DB - qazqaz
+
+
+
+   !!! To automatically determine the ip address uncomment all the lines in a file createvm.sh
+   
+
+
+
+1. Content of folder chef-commerce-new
+
+adistro                            
+cookbooks                                 folder for recipies      
+copy_files.sh                             for copy distros to virtual machins 
+data_bags                                 
+deploy.sh                                 for deptoy cookbooks to the virtual machine
+execute_recipe.bat                        for start ewecute recipe and mount net drives
+install.sh                                for install and upload chef in remote host 
+installs
+nodes                                     folder for variable of chef recipies
+otherFiles
+roles
+solo.rb                                   configfile for chef environment 
+
+2. Content of folder adistro
+
+CentOS-6.6.ova                            imagefile for creating virtual machines 
+arch_for_atg10.0.3_java6_jBoss5.1
+arch_for_oracle
+chef-12.1.2-1.el6.x86_64.rpm
+createvm.sh                               for creating virtual machines
+import_keys.sh                            for generation and importing public keys
+ipsmb.txt                                 containes data for mount net drives     
+nmap                                      net scaner
+oracle_template.json                       
+run_recipe.sh                             interactive collecting information from user
+sudoers
+template.json
+
+3. Content of folder arch_for_atg10.0.3_java6_jBoss5.1 (distros for emulation of file server)
+
+ATG10.0.3.bin
+CommerceReferenceStore10.0.3.2.bin
+java_oracle-6.tar.gz
+jboss-5.1.0.GA.zip
+jdk-7u79-linux-x64.tar.gz
+jenkins-1.609.1-1.1.noarch.rpm
+ojdbc6.jar
+
+4. Content of folder arch_for_oracle (distros for emulation of file server)
+
+CATA.DMP
+CATB.DMP
+CORE.DMP
+PUB.DMP
+oracle-instantclient11.2-basic-11.2.0.3.0-1.x86_64.rpm.zip
+oracle-instantclient11.2-jdbc-11.2.0.3.0-1.x86_64.rpm.zip
+oracle-instantclient11.2-sqlplus-11.2.0.3.0-1.x86_64.rpm.zip
+oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+
+
+
+
+execute_recipe.bat
+ |
+ createvm.sh 
+ |  |
+ |      import_keys.sh 
+ |
+ run_recipe.sh 
+  |
+  copy_files.sh
+  deploy.sh 
+   |
+   install.sh 
+
+execute_recipe.bat
+
+
+ When you run a file execute_recipe.bat it invokes createvm.sh file, which starts the process
+of creating virtual machines. Then createvm.sh file call file import_keys.sh,
+whose task is to establish, if necessary, public keys and import them to the remote machine
+for passwordless access. After this process returns to execute_recipe.bat.
+    Next in execute_recipe.bat called run_recipe.sh. It interactively collect information from user,
+handle this information for chef (creates node file in node directory) and copy all necessary 
+distros to the remote host with help of copy_files.sh. Thereafter deploy.sh checks whether the 
+remote host has installed chef-solo, and if not, copy there installpackage for chef. Then it
+copies cookbooks and file install.sh to the remote host, and transfers control for install.sh.
+Install.sh start chef-solo.
+   At the end, in a file execute_recipe.bat are connecting network drives on the local machine

@@ -1,0 +1,10 @@
+{
+ "ora" :{
+   "use_dump_files": use_dump_files_template,
+   "run_per_se": "true"
+ },
+ 
+ "run_list": [
+	"recipe[oracle11]"
+  ]
+}

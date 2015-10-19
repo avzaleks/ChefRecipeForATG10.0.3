@@ -1,0 +1,34 @@
+{
+  "name": "jenkins_conf",
+  "version": "",
+  "description": "Configure Jenkins",
+  "long_description": "",
+  "maintainer": "Alex",
+  "maintainer_email": "aleksandr.zaichko@gmail.com",
+  "license": "Apache 2.0",
+  "platforms": {
+    "centos": ">= 0.0.0",
+    "redhat": ">= 0.0.0",
+    "fedora": ">= 0.0.0",
+    "ubuntu": ">= 0.0.0",
+    "debian": ">= 0.0.0"  
+  },
+  "dependencies": {
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  }
+}

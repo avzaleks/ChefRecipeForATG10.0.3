@@ -1,0 +1,20 @@
+#!/bin/bash
+
+firewall-cmd --permanent --zone=public --add-service=samba
+firewall-cmd --permanent --zone=public --add-service=smtp
+firewall-cmd --permanent --zone=public --add-port=10000/tcp
+firewall-cmd --permanent --zone=public --add-port=7070/tcp
+firewall-cmd --permanent --zone=public --add-port=1521/tcp
+firewall-cmd --permanent --zone=public --add-port=8080/tcp
+firewall-cmd --permanent --zone=public --add-port=8180/tcp
+firewall-cmd --permanent --zone=public --add-port=8861/tcp
+firewall-cmd --permanent --zone=public --add-port=8851/tcp
+firewall-cmd --permanent --zone=public --add-port=8811/tcp
+firewall-cmd --permanent --zone=public --add-port=8816/tcp
+firewall-cmd --permanent --zone=public --add-port=9010/tcp
+firewall-cmd --permanent --zone=public --add-port=9012/tcp
+firewall-cmd --permanent --zone=public --add-port=8443/tcp
+firewall-cmd --permanent --zone=public --add-port=8860/tcp
+firewall-cmd --permanent --zone=public --add-port=8850/tcp
+firewall-cmd --permanent --zone=public --add-port=8810/tcp
+firewall-cmd --reload

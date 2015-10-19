@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cat $0
+<%= node['jenkins']['comands_for_shell_job']%>
+echo 'I will copy jenkins artifacts to <%= node['jenkins']['jenkins_dir_for_artifakts']%>'
+cp -fR <%= node['jenkins']['jenkins_job_workspace']%>/* <%= node['jenkins']['jenkins_dir_for_artifakts']%>

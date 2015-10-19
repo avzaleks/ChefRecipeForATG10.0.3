@@ -1,0 +1,5 @@
+name=<%= node['jenkins']['name_of_new_job']%>
+mode=<%= node['jenkins']['module_set']%>
+from=<%= node['jenkins']['copy_item_from']%>
+json={"name": "<%= node['jenkins']['name_of_new_job']%>", "mode": "<%= node['jenkins']['module_set']%>", "from": "<%= node['jenkins']['copy_item_from']%>"}
+Submit=OK

@@ -1,0 +1,36 @@
+{
+ "ora" :{"use_dump_files": use_dump_files_template}, 
+  
+ 
+ "postfix" :{
+	"test_mail_address": "test_mail_address_template"
+ },
+ 
+ "cim" :{
+	"ip_of_dbhost": "ip_of_dbhost_template",
+	"use_dump_files": use_dump_files_template
+ },
+
+ "jenkins" :{
+	"admin_addr_email": "admin_addr_email_template"
+ },
+ 
+ "jenkins" :{
+	"email_recipients": "email_recipients_template"
+ },
+  
+ "run_list": [
+	"recipe[firewall]",
+	"recipe[oracle11]",
+	"recipe[user]",
+    "recipe[java6]",
+	"recipe[jboss5.1]",
+    "recipe[atg10.0.3]",
+	"recipe[cim]",
+	"recipe[postfix]",
+	"recipe[jenkins]",
+	"recipe[jenkins_conf]",
+	"recipe[jenkins_jobs]",
+	"recipe[samba-server]"
+  ]
+}

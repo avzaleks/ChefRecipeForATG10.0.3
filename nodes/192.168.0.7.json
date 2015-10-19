@@ -1,0 +1,35 @@
+{
+ "ora" :{"use_dump_files": false}, 
+  
+ 
+ "postfix" :{
+	"test_mail_address": "aleksandr.zaichko@gmail.com"
+ },
+ 
+ "cim" :{
+	"ip_of_dbhost": "192.168.0.10",
+	"use_dump_files": false
+ },
+
+ "jenkins" :{
+	"admin_addr_email": "aleksandr.zaichko@gmail.com"
+ },
+ 
+ "jenkins" :{
+	"email_recipients": "aleksandr.zaichko@gmail.com"
+ },
+  
+ "run_list": [
+	"recipe[firewall]",
+	"recipe[user]",
+    "recipe[java6]",
+	"recipe[jboss5.1]",
+    "recipe[atg10.0.3]",
+	"recipe[cim]",
+	"recipe[postfix]",
+	"recipe[jenkins]",
+	"recipe[jenkins_conf]",
+	"recipe[jenkins_jobs]",
+	"recipe[samba-server]"
+  ]
+}
